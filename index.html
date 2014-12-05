@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>D€mo</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="yeti.css">
+s
+<style type="text/css">
+
+</style>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">D€mo</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" onclick="javascript:demo.votacion();">Votacion</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+    
+      <div class="row">
+
+        <div id="partido0" class="col-md-6" style="display: none;">
+          <div class="panel panel-danger">
+            <div class="panel-heading">Partido Rojo <span class="badge pull-right" id="total0">0</span></div>
+            <div class="panel-body text-center">
+              <div class="progress">
+                <div id="barraEscanos0" class="progress-bar progress-bar-success" style="width: 0%"></div>
+                <div id="barraVotos0" class="progress-bar progress-bar-warning" style="width: 0%"></div>
+                <div id="barraResto0" class="progress-bar progress-bar-danger" style="width: 0%"></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h4 class="text-danger"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span id="escanos0">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:demo.addEscano(0, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:demo.addEscano(0, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-danger"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="votos0">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:demo.addVoto(0, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:demo.addVoto(0, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-danger"><span class="glyphicon glyphicon-user"></span>&nbsp;<span id="resto0">0</span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="partido1" class="col-md-6" style="display: none;">
+          <div class="panel panel-info">
+            <div class="panel-heading">Partido Azul <span class="badge pull-right" id="total1">0</span></div>
+            <div class="panel-body text-center">
+              <div class="progress">
+                <div id="barraEscanos1" class="progress-bar progress-bar-success" style="width: 0%"></div>
+                <div id="barraVotos1" class="progress-bar progress-bar-warning" style="width: 0%"></div>
+                <div id="barraResto1" class="progress-bar progress-bar-danger" style="width: 0%"></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h4 class="text-info"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span id="escanos1">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-info" onclick="javascript:demo.addEscano(1, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-info" onclick="javascript:demo.addEscano(1, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-info"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="votos1">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-info" onclick="javascript:demo.addVoto(1, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-info" onclick="javascript:demo.addVoto(1, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-info"><span class="glyphicon glyphicon-user"></span>&nbsp;<span id="resto1">0</span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="partido2" class="col-md-6" style="display: none;">
+          <div class="panel panel-success">
+            <div class="panel-heading">Partido Verde <span class="badge pull-right" id="total2">0</span></div>
+            <div class="panel-body text-center">
+              <div class="progress">
+                <div id="barraEscanos2" class="progress-bar progress-bar-success" style="width: 0%"></div>
+                <div id="barraVotos2" class="progress-bar progress-bar-warning" style="width: 0%"></div>
+                <div id="barraResto2" class="progress-bar progress-bar-danger" style="width: 0%"></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h4 class="text-success"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span id="escanos2">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-success" onclick="javascript:demo.addEscano(2, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-success" onclick="javascript:demo.addEscano(2, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-success"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="votos2">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-success" onclick="javascript:demo.addVoto(2, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-success" onclick="javascript:demo.addVoto(2, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-danger" style="display: none;"><span class="glyphicon glyphicon-user"></span>&nbsp;<span id="resto1">0</span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="partido3" class="col-md-6" style="display: none;">
+          <div class="panel panel-warning">
+            <div class="panel-heading">Partido Amarillo <span class="badge pull-right" id="total3">0</span></div>
+            <div class="panel-body text-center">
+              <div class="progress">
+                <div id="barraEscanos3" class="progress-bar progress-bar-success" style="width: 0%"></div>
+                <div id="barraVotos3" class="progress-bar progress-bar-warning" style="width: 0%"></div>
+                <div id="barraResto3" class="progress-bar progress-bar-danger" style="width: 0%"></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h4 class="text-warning"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span id="escanos3">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:demo.addEscano(3, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:demo.addEscano(3, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-warning"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="votos3">0</span></h4>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:demo.addVoto(3, 1);return false;"><span class="glyphicon glyphicon-plus"/></button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:demo.addVoto(3, -1);return false;"><span class="glyphicon glyphicon-minus"/></button>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <h4 class="text-danger" style="display: none;"><span class="glyphicon glyphicon-user"></span>&nbsp;<span id="resto1">0</span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="modal fade" id="modalNuevo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Nuevo juego</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form" role="form">
+              <div class="form-group">
+                <label for="jugadores">Selecciona el nº de jugadores </label>
+                <select class="form-control" id="jugadores">
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="javascript:jugar()">¡A jugar!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalResultados">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Resultado</h4>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <tr class="danger" id="votacion0" style="display: none;">
+                <td><h3>Partido Rojo</h3></td>
+                <td><h2><span id="resultado0" name="resultado">0</span></h2></td>
+              </tr>
+              <tr class="info" id="votacion1" style="display: none;">
+                <td><h3>Partido Azul</h3></td>
+                <td><h2><span id="resultado1" name="resultado">0</span></h2></td>
+              </tr>
+              <tr class="success" id="votacion2" style="display: none;">
+                <td><h3>Partido Verde</h3></td>
+                <td><h2><span id="resultado2" name="resultado">0</span></h2></td>
+              </tr>
+              <tr class="warning" id="votacion3" style="display: none;">
+                <td><h3>Partido Amarillo</h3></td>
+                <td><h2><span id="resultado3" name="resultado">0</span></h2></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+      $('#modalResultados').on('show.bs.modal', function (e) {
+        console.log("Resultados!!!")
+      })
+      $("#modalNuevo").modal();
+    });
+
+    var Partido = function(id, mayoritario){
+      this.id = id;
+      this.mayoritario = mayoritario;
+      this.escanos  = 0;
+      this.votos    = 0;
+      this.resto    = 0;
+
+      if(this.mayoritario){
+        this.resto = 17;
+      }
+    };
+
+    var Juego = function(jugadores){
+      console.log("* Nueva partida: "+ jugadores +" jugadores")
+      this.total = 0;
+      this.partidos = [];
+
+      for(var n = 0; n < jugadores; n++){
+        this.partidos.push(new Partido(n,  (n < 2) ));
+      }
+
+      for(p in this.partidos){
+        var partido = this.partidos[p];
+        var escanos = partido.mayoritario?2:1;
+        this.addEscano(partido.id, escanos);
+      }
+
+      for(var n = 0; n < jugadores; n++){
+        $("#partido"+n).fadeIn();
+        $("#votacion"+n).fadeIn();
+      }
+
+    };
+
+    Juego.prototype.actualizar = function(){
+      console.log("* Actualizando");
+
+      this.total = 0;
+      for(p in this.partidos){
+        var partido = this.partidos[p];
+        this.total += partido.escanos + partido.votos + partido.resto;
+      }
+
+      for(p in this.partidos){
+        var partido = this.partidos[p];
+        var id = partido.id;
+        var barraEscanos = partido.escanos*100 / this.total;
+        var barraVotos = partido.votos*100 / this.total;
+        var barraResto = partido.resto*100 / this.total;
+        var totalPartido = partido.escanos + partido.votos + partido.resto;
+        $("#escanos"+id).text(partido.escanos);
+        $("#barraEscanos"+id).width(barraEscanos+"%");
+        $("#votos"+id).text(partido.votos);
+        $("#barraVotos"+id).width(barraVotos+"%");
+        $("#resto"+id).text(partido.resto);
+        $("#barraResto"+id).width(barraResto+"%");
+        $("#total"+id).html("<strong>"+totalPartido+"</strong> / "+this.total);
+      }
+    };
+
+    Juego.prototype.addEscano = function(id, valor){
+      this.partidos[id].escanos += valor;
+      for(p in this.partidos){
+        var partido = this.partidos[p];
+        if(partido.mayoritario){
+          partido.resto -= valor;
+        }
+      }
+      this.actualizar();
+    };
+
+    Juego.prototype.addVoto = function(id, valor){
+      this.partidos[id].votos += valor;
+      this.actualizar();
+    };
+
+    Juego.prototype.votacion = function(){
+      console.log("* Votación")
+      var urna = [];
+      for(p in this.partidos){
+        var partido = this.partidos[p];
+        var subTotal = partido.escanos + partido.votos + partido.resto;
+        for(var n = 0; n < subTotal; n++){
+          urna.push(partido.id);
+        }
+      }
+      console.log(" - urna");
+      console.log(urna);
+      var votos = [];
+      var count = 17;
+      while(count > 0){
+        var x = Math.floor( Math.random() * urna.length );
+        var id = urna.splice(x, 1);
+        if(!votos[id]){
+          votos[id] = 0;
+        }
+        votos[id] = votos[id]+1;
+        console.log(" + "+ id +" : "+ votos[id]);
+        count--;
+      }
+      console.log(" - votos");
+      console.table(votos);
+
+      $("td[name='resultado").text("");
+      for(p in votos){
+        $("#resultado"+p).text(votos[p]);
+      }
+
+      $("#modalResultados").modal();
+    };
+
+    var demo = {};
+
+    function jugar(){
+      console.log("* ¡A jugar!");
+      var jugadores = $("#jugadores").val();
+      var partidos = 0;
+      console.log(" - "+jugadores+" jugadores")
+      switch(jugadores){
+        case "2": partidos = 2;
+          break;
+        case "3": partidos = 2;
+          break;
+        case "4": partidos = 2;
+          break;
+        case "5": partidos = 3;
+          break;
+        case "6": partidos = 4;
+          break;
+      }
+
+      console.log(" - "+partidos+" partidos");
+
+      $("#modalNuevo").fadeOut();
+      demo = new Juego(partidos);
+    }
+    </script>
+
+  </body>
+</html>
