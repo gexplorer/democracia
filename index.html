@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="yeti.css">
-s
+
 <style type="text/css">
 
 </style>
@@ -182,10 +182,10 @@ s
                 <label for="jugadores">Selecciona el nº de jugadores </label>
                 <select class="form-control" id="jugadores">
                   <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
+                  <option value="2">3</option>
+                  <option value="2">4</option>
+                  <option value="3">5</option>
+                  <option value="4">6</option>
                 </select>
               </div>
             </form>
@@ -254,12 +254,12 @@ s
       }
     };
 
-    var Juego = function(jugadores){
-      console.log("* Nueva partida: "+ jugadores +" jugadores")
+    var Juego = function(partidos){
+      console.log("* Nueva partida: "+ partidos +" partidos")
       this.total = 0;
       this.partidos = [];
 
-      for(var n = 0; n < jugadores; n++){
+      for(var n = 0; n < partidos; n++){
         this.partidos.push(new Partido(n,  (n < 2) ));
       }
 
@@ -269,7 +269,7 @@ s
         this.addEscano(partido.id, escanos);
       }
 
-      for(var n = 0; n < jugadores; n++){
+      for(var n = 0; n < partidos; n++){
         $("#partido"+n).fadeIn();
         $("#votacion"+n).fadeIn();
       }
@@ -357,23 +357,7 @@ s
 
     function jugar(){
       console.log("* ¡A jugar!");
-      var jugadores = $("#jugadores").val();
-      var partidos = 0;
-      console.log(" - "+jugadores+" jugadores")
-      switch(jugadores){
-        case "2": partidos = 2;
-          break;
-        case "3": partidos = 2;
-          break;
-        case "4": partidos = 2;
-          break;
-        case "5": partidos = 3;
-          break;
-        case "6": partidos = 4;
-          break;
-      }
-
-      console.log(" - "+partidos+" partidos");
+      var partidos = $("#jugadores").val();
 
       $("#modalNuevo").fadeOut();
       demo = new Juego(partidos);
