@@ -346,7 +346,11 @@
 
       $("td[name='resultado").text("");
       for(p in votos){
-        $("#resultado"+p).text(votos[p]);
+        var valor = votos[p].valor;
+        if(valor >= 9){
+          valor = "<strong>"+valor+"</strong>";
+        }
+        $("#resultado"+votos[p].id).html(valor);
       }
 
       $("#modalResultados").modal();
