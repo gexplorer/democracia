@@ -178,7 +178,7 @@
                 <label for="jugadores">Selecciona el nº de jugadores </label>
                 <select class="form-control" id="jugadores">
                   <option value="2">2</option>
-                  <option value="2">3</option>
+                  <option value="3">3</option>
                   <option value="2">4</option>
                   <option value="3">5</option>
                   <option value="4">6</option>
@@ -330,20 +330,27 @@
       var count = 17;
       while(count > 0){
         var x = Math.floor( Math.random() * urna.length );
-        var id = urna.splice(x, 1);
+        var id = urna.splice(x, 1)[0];
         if(!votos[id]){
-          votos[id] = 0;
+          votos[id] = {};
+          votos[id].id = id;
+          votos[id].valor = 0;
         }
-        votos[id] = votos[id]+1;
-        console.log(" + "+ id +" : "+ votos[id]);
+        votos[id].valor = votos[id].valor+1;
+        console.log(" + "+ votos[id].id +" : "+ votos[id].valor);
         count--;
       }
       console.log(" - votos");
+      votos = votos.sort(function(a, b){return b.valor-a.valor});
       console.table(votos);
 
       $("td[name='resultado").text("");
       for(p in votos){
-        $("#resultado"+p).text(votos[p]);
+        var valor = votos[p].valor;
+        if(valor >= 9){
+          valor = "<strong>"+valor+"</strong>";
+        }
+        $("#resultado"+votos[p].id).html(valor);
       }
 
       $("#modalResultados").modal();
