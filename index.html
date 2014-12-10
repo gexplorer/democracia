@@ -330,15 +330,18 @@
       var count = 17;
       while(count > 0){
         var x = Math.floor( Math.random() * urna.length );
-        var id = urna.splice(x, 1);
+        var id = urna.splice(x, 1)[0];
         if(!votos[id]){
-          votos[id] = 0;
+          votos[id] = {};
+          votos[id].id = id;
+          votos[id].valor = 0;
         }
-        votos[id] = votos[id]+1;
-        console.log(" + "+ id +" : "+ votos[id]);
+        votos[id].valor = votos[id].valor+1;
+        console.log(" + "+ votos[id].id +" : "+ votos[id].valor);
         count--;
       }
       console.log(" - votos");
+      votos = votos.sort(function(a, b){return b.valor-a.valor});
       console.table(votos);
 
       $("td[name='resultado").text("");
