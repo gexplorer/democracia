@@ -280,16 +280,21 @@
       this.total = 0;
       for(p in this.partidos){
         var partido = this.partidos[p];
-        this.total += partido.escanos + partido.votos + partido.resto;
+        this.total += partido.votos + partido.resto;
       }
 
+      var barraTotalEscanos = this.totalEscanos*100 / this.MAX_ESCANOS;
       for(p in this.partidos){
         var partido = this.partidos[p];
         var id = partido.id;
-        var barraEscanos = partido.escanos*100 / this.total;
-        var barraVotos = partido.votos*100 / this.total;
-        var barraResto = partido.resto*100 / this.total;
+        var barraEscanos = partido.escanos*100 / this.MAX_ESCANOS;
+        var barraVotos = partido.votos*(100-barraTotalEscanos) / this.total;
+        var barraResto = partido.resto*(100-barraTotalEscanos) / this.total;
         var totalPartido = partido.escanos + partido.votos + partido.resto;
+        if(this.totalEscanos == this.MAX_ESCANOS){
+          barraVotos = 0;
+          barraResto = 0;
+        }
         $("#escanos"+id).text(partido.escanos);
         $("#barraEscanos"+id).width(barraEscanos+"%");
         $("#votos"+id).text(partido.votos);
@@ -303,9 +308,6 @@
     Juego.prototype.addEscano = function(id, valor){
       if(valor < 0 && this.partidos[id].escanos == 0
         || valor > 0 && this.totalEscanos == this.MAX_ESCANOS){
-        console.log(this.totalEscanos);
-        console.log(this.MAX_ESCANOS);
-        console.log("NO");
         return false;
       }
       this.partidos[id].escanos += valor;
