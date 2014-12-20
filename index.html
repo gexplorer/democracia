@@ -254,6 +254,8 @@
       console.log("* Nueva partida: "+ partidos +" partidos")
       this.total = 0;
       this.partidos = [];
+      this.totalEscanos = 0;
+      this.MAX_ESCANOS  = 17;
 
       for(var n = 0; n < partidos; n++){
         this.partidos.push(new Partido(n,  (n < 2) ));
@@ -299,10 +301,15 @@
     };
 
     Juego.prototype.addEscano = function(id, valor){
-      if(valor < 0 && this.partidos[id].escanos == 0){
+      if(valor < 0 && this.partidos[id].escanos == 0
+        || valor > 0 && this.totalEscanos == this.MAX_ESCANOS){
+        console.log(this.totalEscanos);
+        console.log(this.MAX_ESCANOS);
+        console.log("NO");
         return false;
       }
       this.partidos[id].escanos += valor;
+      this.totalEscanos += valor;
       for(p in this.partidos){
         var partido = this.partidos[p];
         if(partido.mayoritario){
