@@ -299,6 +299,9 @@
     };
 
     Juego.prototype.addEscano = function(id, valor){
+      if(valor < 0 && this.partidos[id].escanos == 0){
+        return false;
+      }
       this.partidos[id].escanos += valor;
       for(p in this.partidos){
         var partido = this.partidos[p];
@@ -310,6 +313,9 @@
     };
 
     Juego.prototype.addVoto = function(id, valor){
+      if(valor < 0 && this.partidos[id].votos == 0){
+        return false;
+      }
       this.partidos[id].votos += valor;
       this.actualizar();
     };
