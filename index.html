@@ -254,6 +254,8 @@
       console.log("* Nueva partida: "+ partidos +" partidos")
       this.total = 0;
       this.partidos = [];
+      this.totalEscanos = 0;
+      this.MAX_ESCANOS  = 17;
 
       for(var n = 0; n < partidos; n++){
         this.partidos.push(new Partido(n,  (n < 2) ));
@@ -278,16 +280,21 @@
       this.total = 0;
       for(p in this.partidos){
         var partido = this.partidos[p];
-        this.total += partido.escanos + partido.votos + partido.resto;
+        this.total += partido.votos + partido.resto;
       }
 
+      var barraTotalEscanos = this.totalEscanos*100 / this.MAX_ESCANOS;
       for(p in this.partidos){
         var partido = this.partidos[p];
         var id = partido.id;
-        var barraEscanos = partido.escanos*100 / this.total;
-        var barraVotos = partido.votos*100 / this.total;
-        var barraResto = partido.resto*100 / this.total;
+        var barraEscanos = partido.escanos*100 / this.MAX_ESCANOS;
+        var barraVotos = partido.votos*(100-barraTotalEscanos) / this.total;
+        var barraResto = partido.resto*(100-barraTotalEscanos) / this.total;
         var totalPartido = partido.escanos + partido.votos + partido.resto;
+        if(this.totalEscanos == this.MAX_ESCANOS){
+          barraVotos = 0;
+          barraResto = 0;
+        }
         $("#escanos"+id).text(partido.escanos);
         $("#barraEscanos"+id).width(barraEscanos+"%");
         $("#votos"+id).text(partido.votos);
@@ -299,7 +306,12 @@
     };
 
     Juego.prototype.addEscano = function(id, valor){
+      if(valor < 0 && this.partidos[id].escanos == 0
+        || valor > 0 && this.totalEscanos == this.MAX_ESCANOS){
+        return false;
+      }
       this.partidos[id].escanos += valor;
+      this.totalEscanos += valor;
       for(p in this.partidos){
         var partido = this.partidos[p];
         if(partido.mayoritario){
@@ -310,6 +322,9 @@
     };
 
     Juego.prototype.addVoto = function(id, valor){
+      if(valor < 0 && this.partidos[id].votos == 0){
+        return false;
+      }
       this.partidos[id].votos += valor;
       this.actualizar();
     };
